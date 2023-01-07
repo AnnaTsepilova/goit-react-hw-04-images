@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 import Section from 'components/Section/Section';
 import Searchbar from 'components/Searchbar/Searchbar';

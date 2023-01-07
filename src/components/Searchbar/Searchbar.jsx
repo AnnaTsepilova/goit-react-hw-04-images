@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ImSearch } from 'react-icons/im';
-import { NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import * as Notify from 'services/Notify';
 
 import {
   SearchbarContainer,
@@ -30,7 +29,7 @@ export default class Searchbar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.searchQuery.trim() === '') {
-      return NotificationManager.warning('Please enter your search query.');
+      return Notify.NotificationWarning(Notify.EMPTY_QUERY_MESSAGE);
     }
     this.props.onSubmit(this.state.searchQuery);
     this.reset();
