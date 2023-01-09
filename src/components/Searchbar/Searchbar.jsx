@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { ImSearch } from 'react-icons/im';
 import * as Notify from 'services/Notify';
 
@@ -11,53 +10,39 @@ import {
   SearchFormInput,
 } from 'components/Searchbar/Searchbar.styled';
 
-export default class Searchbar extends Component {
-  static defaultProps = {};
+export default function Searchbar({ onSubmit }) {
+  const [searchQuery, setSearchQuery] = useState('');
 
-  static propTypes = {
-    searchQuery: PropTypes.array,
+  const handleSearchQuery = event => {
+    setSearchQuery(event.currentTarget.value.toLowerCase());
   };
 
-  state = {
-    searchQuery: '',
-  };
-
-  handleSearchQuery = event => {
-    this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    if (this.state.searchQuery.trim() === '') {
+    if (searchQuery.trim() === '') {
       return Notify.NotificationWarning(Notify.EMPTY_QUERY_MESSAGE);
     }
-    this.props.onSubmit(this.state.searchQuery);
-    this.reset();
+    onSubmit(searchQuery);
+    setSearchQuery('');
   };
 
-  reset = () => {
-    this.setState({ searchQuery: '' });
-  };
+  return (
+    <SearchbarContainer>
+      <SearchForm onSubmit={handleSubmit}>
+        <SearchFormButton type="submit">
+          <ImSearch style={{ width: '1.5em', height: '1.5em' }} />
+          <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+        </SearchFormButton>
 
-  render() {
-    return (
-      <SearchbarContainer>
-        <SearchForm onSubmit={this.handleSubmit}>
-          <SearchFormButton type="submit">
-            <ImSearch style={{ width: '1.5em', height: '1.5em' }} />
-            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
-          </SearchFormButton>
-
-          <SearchFormInput
-            type="text"
-            name="searchQuery"
-            autocomplete="off"
-            placeholder="Search images and photos"
-            value={this.state.searchQuery}
-            onChange={this.handleSearchQuery}
-          />
-        </SearchForm>
-      </SearchbarContainer>
-    );
-  }
+        <SearchFormInput
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images and photos"
+          value={searchQuery}
+          onChange={handleSearchQuery}
+        />
+      </SearchForm>
+    </SearchbarContainer>
+  );
 }
