@@ -19,14 +19,6 @@ export default function ImageGallery({ searchQuery, page, loadMore }) {
   const [totalImages, setTotalImages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [prevSearchQuery, setPrevSearchQuery] = useState('');
-  // const [error, setError] = useState(null);
-
-  // const startNewQuery = newQuery => {
-  //   setQuery(newQuery);
-  //   setPage(1);
-  //   setResults([]);
-  //   setTotalImages(0);
-  // };
 
   useEffect(() => {
     if (!searchQuery) {
