@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
@@ -34,3 +35,8 @@ export default function App() {
     </Section>
   );
 }
+
+App.propTypes = {
+  searchQuery: PropTypes.string,
+  page: PropTypes.number,
+};

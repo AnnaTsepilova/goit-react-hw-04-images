@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { ImSearch } from 'react-icons/im';
 import * as Notify from 'services/Notify';
 
@@ -46,3 +47,7 @@ export default function Searchbar({ onSubmit }) {
     </SearchbarContainer>
   );
 }
+
+Searchbar.propTypes = {
+  searchQuery: PropTypes.array,
+};

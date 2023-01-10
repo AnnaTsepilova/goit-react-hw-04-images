@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   ImageGalleryItemLi,
   ImageGalleryItemImage,
@@ -37,3 +38,15 @@ export default function ImageGalleryItem({ img }) {
     </>
   );
 }
+
+ImageGalleryItem.propTypes = {
+  onModalOpen: PropTypes.func,
+  image: PropTypes.object,
+  img: PropTypes.objectOf(
+    PropTypes.shape({
+      webformatURL: PropTypes.string,
+      tags: PropTypes.string,
+      id: PropTypes.number,
+    })
+  ).isRequired,
+};
